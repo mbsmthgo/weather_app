@@ -24,6 +24,13 @@ function Search(props) {
             .then(function (response) {
                 if (response.ok) {
                     return response.json()
+                } else {
+                     response.json()
+                        .then(function (errorData) {
+                            console.log(errorData.message)
+                            props.setErrorMessage(errorData.message)
+                        });
+
                 }
             }).then(function (data) {
             props.setInfo(data)
@@ -41,7 +48,6 @@ function Search(props) {
                        spellCheck="false"/>
             </label>
             <button className="button" onClick={handleButtonClick}>Search</button>
-            <div className="error">Invalid city name</div>
         </div>
     )
 }
